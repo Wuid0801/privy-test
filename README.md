@@ -46,3 +46,4 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 ## Acknowledgments
 
 Special thanks to Privy and friend.tech for inspiring this tutorial. Harness the future of decentralized applications with the power of Web 2.5!
+# SolDelegate-Test
