@@ -6,8 +6,13 @@ import { useEffect, useState } from "react";
 import SignMessage from "../components/SignMessage";
 import SendTransaction from "../components/SendTransaction";
 import { ethers } from "ethers";
+import { DelegateActionButton } from "../components/Delegate";
+import { RevokeDelegation } from "../components/Revoke";
+import SignMessageSol from "../components/SignMessageSol";
+import ConnectWithoutSignature from "../components/DelegateTest";
 
 function LoggedIn() {
+
   const {
     ready,
     authenticated,
@@ -29,6 +34,9 @@ function LoggedIn() {
   const [selectedLink, setSelectedLink] = useState<string>("");
   const [embeddedWallet, setEmbeddedWallet] = useState<any>();
   const [walletBalance, setWalletBalance] = useState<string>("");
+  console.log("사용자:",user)
+  console.log("사용자 지갑:",user?.wallet)
+  console.log("사이트 지갑:",embeddedWallet)
 
   useEffect(() => {
     if (!ready) {
@@ -81,6 +89,7 @@ function LoggedIn() {
     }
   };
 
+
   return (
     <div className="p-8">
       <p className="text-xl font-semibold">Logged in</p>
@@ -116,8 +125,12 @@ function LoggedIn() {
       </div>
       <p>The Address of the Embedded Wallet is {embeddedWallet?.address}</p>
       {walletBalance && <p>With a Balance of {walletBalance}ETH</p>}
-      <SignMessage signMessage={signMessage} user={user} />
+      <SignMessage user={user} />
+      <SignMessageSol/>
+      <DelegateActionButton/>
       <SendTransaction sendTransaction={sendTransaction} user={user} />
+      <ConnectWithoutSignature/>
+      <RevokeDelegation/>
       <div>
         <button
           onClick={logout}
