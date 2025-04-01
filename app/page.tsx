@@ -1,18 +1,30 @@
 "use client";
 
-import { usePrivy } from "@privy-io/react-auth";
+import { useLogin, usePrivy } from "@privy-io/react-auth";
 import { useRouter } from "next/navigation";
 
 export default function Home() {
-  const { login, ready, authenticated } = usePrivy();
+  const {  ready, authenticated } = usePrivy();
   const router = useRouter();
-
+  const { login } = useLogin();
+  // Disable login when Privy is not ready or the user is already authenticated
+  const disableLogin = !ready || (ready && authenticated);
   if (!ready) return <></>;
 
   if (ready && authenticated) router.push("/loggedin");
 
   return (
     <main className="p-8 text-center">
+       <button
+            disabled={disableLogin}
+            onClick={() => login({
+                loginMethods: ['wallet','twitter'],
+                walletChainType: 'ethereum-and-solana',
+                disableSignup: false
+            })}
+        >
+            Log in
+        </button>
       <h1 className="text-2xl font-semibold mb-4">
         Privy Embedded Wallet Demo
       </h1>

@@ -3,6 +3,7 @@ import { useDelegatedActions, useSolanaWallets } from "@privy-io/react-auth";
 function ConnectWithoutSignature() {
   // 연결된 월렛 목록 가져오기
   const { wallets } = useSolanaWallets();
+  console.log("wallets", wallets)
   // useDelegatedActions에서 delegateWallet 함수 추출
   const { delegateWallet } = useDelegatedActions();
 
@@ -25,7 +26,7 @@ function ConnectWithoutSignature() {
     };
 
     return (
-      <button onClick={setupDelegation}>권한 위임 설정</button>
+      <button className="px-4 py-2 bg-blue-500 text-white rounded" onClick={setupDelegation}>권한 위임 설정</button>
     );
   } else {
     return <p>Phantom 월렛을 연결해주세요.</p>;
